@@ -1,0 +1,57 @@
+#include <iostream>
+#include <stack>
+
+using namespace std;
+/*
+int main(){
+
+    int N;
+    cin>>N;
+
+    stack<int> s;
+
+    for(int i=0; i<N; i++){
+        string color;
+        cin>>color;
+
+        int num;
+        cin>>num;
+
+        if(color=="white"){
+            s.push(num);
+        }
+        else if(color =="green"){
+            int sum=0;
+            while(num-->0){
+                sum+= s.top();
+                s.pop();
+            }
+            s.push(sum);
+        }
+        else if(color=="blue"){
+            int max = 0;
+            while(num-->0){
+                if(s.top()>max){
+                    max = s.top();
+                }
+                s.pop();
+            }
+            s.push(max);
+        }
+    }
+    stack<int> s1;
+    int size = s.size();
+    for(int i=0; i<size; i++){
+        s1.push(s.top());
+        s.pop();
+    }
+
+    for(int i=0; i<size; i++){
+        cout<<s1.top()<<" ";
+        s1.pop();
+    }
+
+
+    return 0;
+}
+*/
