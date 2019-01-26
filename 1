@@ -1,0 +1,163 @@
+#include <iostream>
+#include <list>
+using namespace std;
+
+class Graph{
+public:
+    int size;
+    list<int>* adj;
+
+    Graph(int N){
+        size=N;
+        adj = new list<int>[N];
+    }
+
+    void addEdge(int v, int u){
+        adj[v].push_back(u);
+        adj[u].push_back(v);
+    }
+
+    void bfs(int src){
+        bool* visited = new bool[size];
+        for(int i=0; i<size; i++){
+            visited[i] = false;
+        }
+
+        list<int>q;
+        visited[src] = true;
+        q.push_back(src);
+
+        list<int>::iterator it;
+
+        while(!q.empty()){
+            int u = q.front();
+            q.pop_front();
+
+            cout<<u<<" ";
+
+            for(it = adj[u].begin(); it!=adj[u].end(); it++){
+                if(visited[*it]==false){
+                    q.push_back(*it);
+                    visited[*it]=true;
+                    break;
+                }
+            }
+        }
+    }
+
+    void shortestPathFromSrc(int src) {
+        bool *visited = new bool[size];
+        int *dist = new int[size];
+        for (int i = 0; i < size; i++) {
+            visited[i] = false;
+            dist[i] = 0;
+        }
+
+        list<int> q;
+        visited[src] = true;
+        q.push_back(src);
+
+        list<int>::iterator it;
+
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop_front();
+
+            for (it = adj[u].begin(); it != adj[u].end(); it++) {
+                if (visited[*it] == false) {
+                    visited[*it] = true;
+                    dist[*it] = dist[u] + 1;
+                }
+            }
+        }
+
+
+        int idx = 0;
+
+        for (int i = 0; i < size; i++) {
+
+                cout << dist[i] << " ";
+
+            idx++;
+        }
+    }
+
+    bool isReachable(int src, int dest){
+        bool* visited = new bool[size];
+
+        for(int i=0; i<size; i++){
+            visited[i] = false;
+        }
+
+        if(src==dest){
+            return true;
+        }
+
+        list<int>q;
+        q.push_back(src);
+
+        visited[src] = true;
+
+        list<int>::iterator it;
+
+        while(!q.empty()){
+            int u = q.front();
+            q.pop_front();
+
+            for(it = adj[u].begin(); it!=adj[u].end(); it++){
+                if(visited[*it]==false){
+                    visited[*it]=true;
+                    q.push_back(*it);
+                    if(*it==dest){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    void DFSUtil(int v, bool* visited){
+        if(visited[v]==false){
+            cout<<v<<" ";
+            visited[v] = true;
+            for(list<int>::iterator it =adj[v].begin(); it!=adj[v].end(); it++){
+                DFSUtil(*it, visited);
+            }
+        }
+    }
+
+    void DFS(int src){
+        bool* visited = new bool[size];
+
+        for(int i=0; i<size; i++){
+            visited[i] = false;
+        }
+
+        DFSUtil(src, visited);
+    }
+};
+/*
+int main(){
+int N, M;
+cin>>N>>M;
+    Graph g(N);
+
+    while(M-->0){
+        int num1, num2;
+        cin>>num1>>num2;
+        g.addEdge(num1, num2);
+    }
+int src;
+    cin>>src;
+g.bfs(src);
+cout<<endl;
+g.shortestPathFromSrc(src);
+cout<<endl;
+cout<<g.isReachable(0,2);
+cout<<endl;
+
+g.DFS(3);
+
+    return 0;
+}*/
