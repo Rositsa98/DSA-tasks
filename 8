@@ -1,0 +1,60 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+/*
+bool binarySearch(int* arr, int l, int r, int x){
+    if(l<r){
+        int m = l +(r-l)/2;
+
+        if(arr[m]==x){
+            return true;
+        }
+
+        if(arr[m]>x){
+            return binarySearch(arr, l, m-1, x);
+        }
+        if(arr[m]<x){
+            return binarySearch(arr, m+1, r, x);
+        }
+    }
+
+    return false;
+}
+
+int main(){
+
+    int N;
+    cin>>N;
+
+    int N1 = N;
+    int arr[N];
+    int idx=0;
+while(N-->0){
+    cin>>arr[idx];
+    idx++;
+}
+
+sort(arr, arr+N1);
+
+bool done = false;
+
+    for(int i=0; i<N1; i++){
+        int num = arr[i];
+        arr[i] = 0;
+
+        if(binarySearch(arr, 0, N1-1, num)==true){
+            cout<<"yes";
+            done = true;
+            break;
+        }
+    }
+
+    if(done==false){
+        cout<<"no";
+    }
+
+
+
+    return 0;
+}*/
