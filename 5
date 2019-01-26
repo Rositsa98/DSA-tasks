@@ -1,0 +1,199 @@
+#include <iostream>
+
+using namespace std;
+
+struct Node{
+    int data;
+    Node* next;
+    Node(int data){
+        this->data = data;
+    }
+};
+
+class List{
+public:
+    Node* head;
+    int size;
+
+    List(){
+        head = NULL;
+        size=0;
+    }
+
+    void push_back(int data){
+        if(head==NULL){
+            head = new Node(data);
+        }
+        else{
+            Node* n = head;
+
+            while(n->next!= nullptr){
+                n = n->next;
+            }
+
+            n->next = new Node(data);
+        }
+
+        size++;
+    }
+
+    void push_front(int data){
+        if(head==NULL){
+            head = new Node(data);
+        }
+        else{
+            Node* node = new Node(data);
+
+            node->next = head;
+            head = node;
+        }
+        size++;
+    }
+
+    void pop_back(){
+        if(head->next!=NULL) {
+
+            Node* n = head;
+
+            while(n->next->next!= nullptr){
+                n = n->next;
+            }
+
+            n->next= nullptr;
+
+
+        }else{
+            head = NULL;
+        }
+        size--;
+    }
+
+    void push_at(int data, int pos){
+        Node* node = new Node(data);
+
+        int idx=0;
+
+        if(head!=NULL){
+
+            if(pos==0){
+                push_front(data);
+            }
+            else if(pos==size){
+                push_back(data);
+            }
+            else {
+
+
+                Node *n = head;
+                while (n->next != nullptr) {
+
+                    if (idx + 1 == pos) {
+                        node->next = n->next;
+                        n->next = node;
+                    }
+
+                    n = n->next;
+                    idx++;
+                }
+            }
+        }
+        size++;
+    }
+
+    void pop_at(int pos) {
+
+        int idx = 0;
+
+        if (head != NULL) {
+
+            if (pos == 0) {
+                pop_front();
+            } else if (pos == size-1) {
+                pop_back();
+            } else {
+
+                Node *n = head;
+
+                while (n!= nullptr) {
+
+                    if (idx + 1 == pos) {
+                        n->next = n->next->next;
+                    }
+
+                    n = n->next;
+                    idx++;
+                }
+            }
+        }
+        size--;
+    }
+
+    void pop_front(){
+
+        head = head->next;
+        size--;
+    }
+
+    void print(){
+        Node* n = head;
+
+        while(n!= nullptr){
+            cout<<n->data<<" ";
+            n = n->next;
+        }
+    }
+
+    void reverse(){
+        Node* curr = head;
+        Node* prev = NULL;
+        Node* next = NULL;
+
+        while(curr!=NULL){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+    }
+
+    void count(){
+        Node* n = head;
+        int min=1000000, max=0, sum=0;
+
+        while(n!=NULL)
+        {
+            if(n->data<min){
+                min = n->data;
+            }
+            if(n->data>max){
+                max = n->data;
+            }
+            sum+=n->data;
+
+            n=n->next;
+        }
+
+        cout<<min<<" "<<max<<" "<<sum;
+    }
+
+};
+/*
+int main(){
+    List l;
+
+    int num;
+
+    while(cin>>num){
+        l.push_back(num);
+
+    }
+
+    l.count();
+
+
+
+
+
+    return 0;
+}*/
