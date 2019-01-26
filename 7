@@ -1,0 +1,69 @@
+#include <iostream>
+#include <map>
+#include <cstring>
+using namespace std;
+//2 strings  J = opisva kakvi skupocenni kamuni ima v kralstvoto
+/*
+ * J = "aA";
+ * max size of J - 52
+ *
+ * kamuk a i kamuk A
+ *
+ * poseti carstvo S = "aAAbbbbbb"
+ *
+ * kolko sa na broi kamunite v S koito sa izvextni v J
+ */
+
+
+/*
+ * daden string
+ * "tree"
+ *
+ * da se sortira masiva taka che
+ * tree - > eevt
+ *
+ *
+ *
+ */
+using namespace std;
+
+int main(){
+
+
+    string j = "aA";
+
+    string s;
+    cin>>s;
+
+    char * arr = new char[s.size()+1];
+
+    for(int i=0; i<j.size(); i++){
+        arr[i] = s.at(i);
+    }
+
+    int count=0;
+    for(int i=0; i<s.size(); i++){
+       for(int t=0; t<j.size(); t++){
+           if(s.at(i)==j.at(t)){
+               count++;
+           }
+       }
+    }
+
+
+    cout<<count;
+
+/*
+
+
+
+    map<char, int> m;
+
+char arr[] = {'t','r', 'e', 'e'};
+
+for(int i=0; i<4; i++){
+    if()
+}
+*/
+    return 0;
+}
