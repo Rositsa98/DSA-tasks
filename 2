@@ -1,0 +1,113 @@
+#include <iostream>
+#include <list>
+#include <queue>
+#include <vector>
+#define INF 0x3f3f3f3f
+
+using namespace std;
+
+class Graph{
+public:
+    int size;
+    list<pair<int, int>> *adj;
+
+    Graph(int N){
+        size = N+1;
+        adj =  new list<pair<int, int>>[N];
+    }
+
+    void addEdge(int v, int u, int w){
+        adj[v].push_back(make_pair(u,w));
+        adj[u].push_back(make_pair(v, w));
+    }
+
+    void diikstra_shortest_path(int src){
+        priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>>pq;
+        vector<int>dist(size, INF);
+
+        dist[src] = 0;
+        pq.push(make_pair(0,src));
+
+        list<pair<int, int>>::iterator it;
+
+        while(!pq.empty()){
+          int u = pq.top().second;
+          pq.pop();
+
+          for(it = adj[u].begin(); it!=adj[u].end(); it++){
+              int v = it->first;
+              int w = it->second;
+
+              if(dist[v]>dist[u]+w){
+                  dist[v] = dist[u]+w;
+                  pq.push(make_pair(dist[v], v));
+              }
+          }
+        }
+
+        vector<int>::iterator i;
+        int idx=0;
+        for(i=dist.begin(); i!=dist.end(); i++){
+            if(idx!=0 && idx!=src){
+            cout<<*i<<" ";
+            }
+            idx++;
+        }
+
+    }
+
+    void prim(int src){
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        vector<int>dist(size, INF);
+        vector<int>parent(size, -1);
+        vector<bool>mstIn(size, false);
+
+        dist[src] = 0;
+        pq.push(make_pair(0, src));
+        mstIn[src] = true;
+
+        list<pair<int,int>>::iterator it;
+
+        while(!pq.empty()){
+            int u = pq.top().second;
+            mstIn[u] = true;
+            pq.pop();
+
+            for(it = adj[u].begin(); it!=adj[u].end(); it++){
+                int v = it->first;
+                int w = it->second;
+
+                if(dist[v]>w && mstIn[v]==false){
+
+                    dist[v] = w;
+                    parent[v] = u;
+                    pq.push(make_pair(dist[v], v));
+                }
+            }
+        }
+
+        for(auto x: parent){
+            cout<<x<<" ";
+        }
+
+    }
+};
+/*
+int main(){
+    int N, M;
+    cin>>N>>M;
+    Graph g(N);
+
+    while(M-->0){
+        int num1, num2, w;
+        cin>>num1>>num2>>w;
+        g.addEdge(num1, num2, w);
+    }
+    int src;
+    cin>>src;
+
+    g.diikstra_shortest_path(src);
+
+
+    return 0;
+}*/
