@@ -1,0 +1,70 @@
+package testtttt;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class teststts {
+
+	public static void main(String[] args) {
+	
+	String t;
+	Scanner scanner = new Scanner(System.in);
+	
+	t = "tree";
+	
+	Map<Character, Integer> m = new HashMap<Character, Integer>();
+	
+	for(int i=0; i<t.length(); i++) {
+		if(m.keySet().contains(t.charAt(i))) {
+			char letter = t.charAt(i);
+			int value = m.get(letter)+1;
+			
+			m.put(letter, value);		
+		}
+		else {
+			m.put(t.charAt(i), 1);
+		}
+	}
+	
+	List<Integer> a = new ArrayList<>();
+	
+	for(int c: m.values()) {
+		a.add(c);
+	}
+	
+	a.sort(Comparator.reverseOrder());
+	
+	List<Character> arr = new ArrayList<>();
+	
+	for(int i=0; i<a.size(); i++) {
+	for(Entry<Character, Integer> c: m.entrySet()) {
+		if(c.getValue()==a.get(i) && !arr.contains(c.getKey())) {
+			int tt = a.get(i);
+			while(tt-->0) {
+			arr.add(c.getKey());
+			}
+			break;
+		}
+	}
+		
+	}
+	
+	Collections.sort(arr);
+	
+	for(int i=0; i<arr.size(); i++) {
+		System.out.println(arr.get(i));
+	}
+	
+	
+	}
+	
+}
