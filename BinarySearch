@@ -2,7 +2,7 @@
 #include <algorithm>
 
 using namespace std;
-/*
+
 bool binarySearch(int* arr, int l, int r, int x){
     if(l<r){
         int m = l +(r-l)/2;
@@ -57,4 +57,4 @@ bool done = false;
 
 
     return 0;
-}*/
+}
